@@ -152,7 +152,7 @@
         <div class="float-right d-none d-sm-block">
             <b>Version</b> 3.1.0
         </div>
-        <strong>Copyright &copy; 2019-2021 <a href="https://ernestoorellana.com">ErnestoOrellana.Com</a>.</strong> All rights reserved.
+        <strong>Copyright &copy; 2019-2021 GRUPO RAIN UMG - All rights reserved.
     </footer>
 
     <!-- Control Sidebar -->
