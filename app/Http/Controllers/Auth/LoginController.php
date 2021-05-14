@@ -46,6 +46,5 @@ class LoginController extends Controller
     public function handleProviderCallback()
     {
         $user = Socialite::driver('google')->stateless()->user();
-        dd($user);
     }
 }
