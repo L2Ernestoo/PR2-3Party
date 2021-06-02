@@ -4,7 +4,11 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
+use App\SocialLogin;
+use App\User;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Str;
 use Laravel\Socialite\Facades\Socialite;
 
 class LoginController extends Controller
@@ -45,6 +49,30 @@ class LoginController extends Controller
 
     public function handleProviderCallback()
     {
-        $user = Socialite::driver('google')->stateless()->user();
+        $userLogin = Socialite::driver('google')->stateless()->user();
+
+        if($userSocial = SocialLogin::where('nick_email', $userLogin->email)->orWhere('nick_email', $userLogin->nickname)->first()){
+            return $this->loginAndRedirect($userSocial->user);
+        }else{
+            //no existe usuario en BD
+            $user = new User;
+            $user->name = Str::of($userLogin->name)->explode(' ')[0];
+            $user->email = $userLogin->email;
+            $user->password = bcrypt(Str::random(10));
+            $user->save();
+
+            $userSocialNew = new SocialLogin;
+            $userSocialNew->user_id = $user->id;
+            $userSocialNew->provider = 'Google';
+            $userSocialNew->nick_email = $userLogin->email;
+            $userSocialNew->social_id = $userLogin->id;
+            $userSocialNew->save();
+
+            return $this->loginAndRedirect($user);
+        }
+    }
+    private function loginAndRedirect($user){
+        Auth::login($user);
+        return redirect()->to('/');
     }
 }

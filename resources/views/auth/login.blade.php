@@ -63,7 +63,7 @@
                                     </a>
                                 @endif
                                 <br><br>
-                                <a class="btn btn-social btn-google" href="{{route('login.google')}}" target="_blank"><i class="fab fa-google"></i> Iniciar Sesión con Google</a>
+                                <a class="btn btn-social btn-google" href="{{route('login.google')}}"><i class="fab fa-google"></i> Iniciar Sesión con Google</a>
                             </div>
                         </div>
                     </form>
