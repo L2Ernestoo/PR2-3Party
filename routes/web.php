@@ -25,3 +25,7 @@ Route::get('catedratico/registro-contenido', 'ActividadesController@index')->nam
 Route::get('catedratico/actividades', 'ActividadesController@all')->name('actividades.all');
 Route::post('store/actividad', 'ActividadesController@store')->name('actividades.store');
 
+
+Route::get('alumnos/subir-tarea', 'ActividadesController@subirTarea')->name('tareas.index');
+Route::get('alumnos/tareas-subidas', 'ActividadesController@tareas')->name('tareas.all');
+Route::post('store/tareas', 'ActividadesController@tarea')->name('tareas.store');

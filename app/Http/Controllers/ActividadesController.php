@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\actividades;
+use App\entregas;
 use App\grados;
 use App\materias;
 use Illuminate\Http\Request;
@@ -63,5 +64,40 @@ class ActividadesController extends Controller
         $tiempo = date('Y/m', $now);
         $fileName = '/' . $dir . '/' . $tiempo;
         return Storage::disk('local')->put($fileName, $file, 'public');
+    }
+
+    public function subirTarea(){
+        return view('alumnos.tarea');
+    }
+
+    public function tarea(Request $request){
+
+        $request->validate([
+            'g-recaptcha-response' => 'recaptcha',
+        ]);
+
+
+        $file = $request->file('file');
+        $archivopath = $this->uploadFile($file,'tarea');
+
+        $tarea = new entregas;
+        $tarea->descripcion = $request->descripcion;
+        $tarea->url_entrega = $archivopath;
+        $tarea->users_id = Auth::user()->id;
+        $tarea->save();
+
+        return redirect()->route('actividades.index');
+    }
+
+    public function tareas(){
+        if(Auth::user()->roles_id_rol === 1) {
+            $tareas = entregas::join('users', 'entregas.users_id', '=', 'users.id')
+                ->select('entregas.*', 'users.name as alumno')
+                ->get();
+        }else{
+            $tareas = entregas::where('users_id', Auth::user()->id)
+                ->get();
+        }
+        return view('alumnos.all', compact('tareas'));
     }
 }

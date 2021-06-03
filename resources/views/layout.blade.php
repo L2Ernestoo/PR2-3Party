@@ -56,6 +56,26 @@
                         </a>
                     </li>
                     @endif
+                        @if(\Illuminate\Support\Facades\Auth::user()->roles_id_rol===2)
+                            <li class="nav-item">
+                                <a href="{{route('tareas.index')}}" class="nav-link">
+                                    <i class="nav-icon fas fa-th"></i>
+                                    <p>
+                                        Subir Tarea
+                                    </p>
+                                </a>
+                            </li>
+                        @endif
+                        <li class="nav-item">
+                            <a href="{{route('tareas.all')}}" class="nav-link">
+                                <i class="nav-icon fas fa-table"></i>
+                                <p>
+                                    Tareas subidas
+                                    <span class="right badge badge-danger">New</span>
+                                    <i class="fas fa-angle-left right"></i>
+                                </p>
+                            </a>
+                        </li>
                     <li class="nav-item">
                         <a href="{{route('actividades.all')}}" class="nav-link">
                             <i class="nav-icon fas fa-table"></i>
