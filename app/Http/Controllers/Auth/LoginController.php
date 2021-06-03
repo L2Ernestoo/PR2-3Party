@@ -58,6 +58,8 @@ class LoginController extends Controller
             $user = new User;
             $user->name = Str::of($userLogin->name)->explode(' ')[0];
             $user->email = $userLogin->email;
+            $user->roles_id_rol = 2;
+            $user->grados_id_grado = 1;
             $user->password = bcrypt(Str::random(10));
             $user->save();
 
