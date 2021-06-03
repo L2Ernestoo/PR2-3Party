@@ -19,12 +19,19 @@ class ActividadesController extends Controller
     }
 
     public function all(){
-        $actividades = actividades::where('id_docente',Auth::user()->id)
-            ->join('materias', 'actividades.id_materia','=','materias.id_materia')
-            ->join('grados', 'actividades.grados_id_grado','=','grados.id_grado')
-            ->select('actividades.*','grados.descripcion as grado','materias.descripcion as materia')
-            ->get();
-
+        if(Auth::user()->roles_id_rol === 1) {
+            $actividades = actividades::where('id_docente', Auth::user()->id)
+                ->join('materias', 'actividades.id_materia', '=', 'materias.id_materia')
+                ->join('grados', 'actividades.grados_id_grado', '=', 'grados.id_grado')
+                ->select('actividades.*', 'grados.descripcion as grado', 'materias.descripcion as materia')
+                ->get();
+        }else{
+            $actividades = actividades::join('materias', 'actividades.id_materia', '=', 'materias.id_materia')
+                ->join('grados', 'actividades.grados_id_grado', '=', 'grados.id_grado')
+                ->join('users', 'actividades.id_docente', '=', 'users.id')
+                ->select('actividades.*', 'grados.descripcion as grado', 'materias.descripcion as materia','users.name as catedratico')
+                ->get();
+        }
         return view('catedraticos.actividades.all', compact('actividades'));
     }
 

@@ -10,6 +10,9 @@
             <th scope="col">Descripcion</th>
             <th scope="col">Materia</th>
             <th scope="col">Grado</th>
+            @if(\Illuminate\Support\Facades\Auth::user()->roles_id_rol === 2)
+                <th scope="col">Catedratico</th>
+            @endif
             <th scope="col">Archivo</th>
         </tr>
         </thead>
@@ -21,6 +24,9 @@
             <td>{{$item->descripcion}}</td>
             <td>{{$item->materia}}</td>
             <td>{{$item->grado}}</td>
+            @if(\Illuminate\Support\Facades\Auth::user()->roles_id_rol === 2)
+                <td>{{$item->catedratico}}</td>
+            @endif
             <td><a href="/../storage/{{$item->url_actividad}}" target="_blank">Ver Archivo</a></td>
         </tr>
         @endforeach

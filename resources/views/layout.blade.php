@@ -65,16 +65,16 @@
                             </p>
                         </a>
                     </li>
-                    <li class="nav-item">
-                        <a href="#" class="nav-link">
-                            <i class="nav-icon fas fa-table"></i>
-                            <p>
-                                Información General
-                                <span class="right badge badge-danger">New</span>
-                                <i class="fas fa-angle-left right"></i>
-                            </p>
-                        </a>
-                    </li>
+{{--                    <li class="nav-item">--}}
+{{--                        <a href="#" class="nav-link">--}}
+{{--                            <i class="nav-icon fas fa-table"></i>--}}
+{{--                            <p>--}}
+{{--                                Información General--}}
+{{--                                <span class="right badge badge-danger">New</span>--}}
+{{--                                <i class="fas fa-angle-left right"></i>--}}
+{{--                            </p>--}}
+{{--                        </a>--}}
+{{--                    </li>--}}
 
                     <li class="nav-item">
                         <a href="{{ route('logout') }}" class="nav-link"
@@ -126,7 +126,7 @@
                         <!-- Default box -->
                         <div class="card">
                             <div class="card-header">
-                                <h3 class="card-title">Bienvenido catedratico {{\Illuminate\Support\Facades\Auth::user()->name}}</h3>
+                                <h3 class="card-title">Bienvenido @if(\Illuminate\Support\Facades\Auth::user()->roles_id_rol === 1) Catedratico @else Alumno @endif {{\Illuminate\Support\Facades\Auth::user()->name}}</h3>
 
                                 <div class="card-tools">
                                     <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
