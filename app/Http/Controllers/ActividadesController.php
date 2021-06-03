@@ -36,6 +36,14 @@ class ActividadesController extends Controller
     }
 
     public function store(Request $request){
+
+        $request->validate([
+            'materia' => 'required',
+            'grado' => 'required',
+            'g-recaptcha-response' => 'recaptcha',
+        ]);
+
+
         $file = $request->file('file');
         $archivopath = $this->uploadFile($file,'archivo');
         $actividad = new actividades;

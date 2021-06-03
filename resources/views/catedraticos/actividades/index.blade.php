@@ -4,6 +4,15 @@
     <h2>Registro de contenido educativo</h2>
     <form id="formActividad" action="{{route('actividades.store')}}" enctype="multipart/form-data" method="post">
         @csrf
+        @if (count($errors) > 0)
+            <div class="error">
+                <ul>
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
         <div class="row">
             <div class="form-group col-md-4">
                 <label for="inputMateria">Materia</label>
@@ -32,6 +41,8 @@
                 <textarea name="descripcion" class="form-control" id="inputDescripcion" rows="3"></textarea>
             </div>
         </div>
+        {!! htmlFormSnippet() !!}
+
         <button type="submit" class="btn btn-primary subirActividad">Subir Actividad</button>
     </form>
 @endsection
