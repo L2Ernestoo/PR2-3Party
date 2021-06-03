@@ -22,5 +22,6 @@ Route::get('login/social/callback/google', 'Auth\LoginController@handleProviderC
 
 
 Route::get('catedratico/registro-contenido', 'ActividadesController@index')->name('actividades.index');
+Route::get('catedratico/actividades', 'ActividadesController@all')->name('actividades.all');
 Route::post('store/actividad', 'ActividadesController@store')->name('actividades.store');
 

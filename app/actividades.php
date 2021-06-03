@@ -13,6 +13,7 @@ class actividades extends Model
         'descripcion',
         'url_actividad',
         'id_docente',
-        'id_materia'
+        'id_materia',
+        'grados_id_grado'
     ];
 }
